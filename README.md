@@ -1,8 +1,8 @@
 # brainfuck interpreter
 ## Usage
-### Execute
+### Execute 
 for stack
-```
+``` bash
 stack run /path/to/file.bf
 
 # for example, in the brainfuck directory
