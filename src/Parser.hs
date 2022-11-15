@@ -1,16 +1,17 @@
-module Bf
+module Parser
   ( BfCommand(..),
+    BfSource,
     bfPareser,
-    syntaxValid,
+    bfSyntaxValid,
   )
 where
 
-import Data.Maybe
+import Data.Maybe ( mapMaybe )
 
 data BfCommand
   = GoRight      -- >
   | GoLeft       -- <
-  | Inc          -- +(++) <$> takeWhile (/=']') <*> tail . dropWhile (/=']')
+  | Inc          -- +
   | Dec          -- -
   | Print        -- .
   | Read         -- ,
@@ -22,9 +23,10 @@ type BfSource = [BfCommand]
 
 -- we don't need comment. So when parsing, we just drop it
 bfPareser :: String -> BfSource
-bfPareser src = if syntaxValid src
-            then mapMaybe charToCommand src
-            else error "\ESC[31m Syntax error!!\ESC[0m Please check your code."
+bfPareser src = 
+  if bfSyntaxValid src
+  then mapMaybe charToCommand src
+  else error "\ESC[31m Syntax error!!\ESC[0m Please check your code."
   where
     charToCommand x
       | x == '>'  = Just GoRight
@@ -37,8 +39,8 @@ bfPareser src = if syntaxValid src
       | x == ']'  = Just LoopRight
       | otherwise = Nothing
 
-syntaxValid :: String -> Bool
-syntaxValid =
+bfSyntaxValid :: String -> Bool
+bfSyntaxValid =
     isValid . filter (\x -> x=='[' || x== ']')
     where
       isValid [] = True

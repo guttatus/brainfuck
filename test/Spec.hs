@@ -1,4 +1,4 @@
-import Bf (BfCommand (..), bfPareser, syntaxValid)
+import Parser (BfCommand (..), bfPareser, bfSyntaxValid)
 import Test.Hspec (describe, hspec, it, shouldBe)
 
 main :: IO ()
@@ -19,9 +19,8 @@ testSyntaxValid :: IO()
 testSyntaxValid = hspec  $ do
     describe "test for syntaxValid" $ do
         it "syntex valid" $ do 
-            syntaxValid "[-][[]][]" `shouldBe` True
+            bfSyntaxValid "[-][[]][]" `shouldBe` True
         it "syntex invalid" $ do
-            syntaxValid "[-" `shouldBe` False
-            syntaxValid "[]][" `shouldBe` False
-            syntaxValid "[[]"  `shouldBe` False
-             
+            bfSyntaxValid "[-" `shouldBe` False
+            bfSyntaxValid "[]][" `shouldBe` False
+            bfSyntaxValid "[[]"  `shouldBe` False

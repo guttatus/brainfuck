@@ -25,7 +25,9 @@ source-repository head
 
 library
   exposed-modules:
-      Bf
+      Eval
+      Parser
+      Tape
   other-modules:
       Paths_brainfuck
   hs-source-dirs:
