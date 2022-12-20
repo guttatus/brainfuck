@@ -1,5 +1,6 @@
 # Changelog for `brainfuck`
 
+## use streaming replace list
 
 ## Unreleased
 
